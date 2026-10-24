@@ -1,0 +1,6 @@
+{
+  "name": "Aura Elite",
+  "description": "Infrastructure institutionnelle d'arbitrage sémantique et de monétisation automatique par agents IA souverains.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

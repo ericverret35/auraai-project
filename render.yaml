@@ -1,0 +1,61 @@
+services:
+  - type: web
+    name: aura-elite-1448
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    region: frankfurt
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3008"
+      - key: APP_URL
+        value: https://aura-elite-1448.onrender.com
+      # Clés secrètes - à définir dans Render Dashboard > Environment
+      - key: NVIDIA_API_KEY
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: ADSENSE_PUB_ID
+        sync: false
+      - key: AMAZON_AFFILIATE_TAG
+        sync: false
+      - key: DISCORD_WEBHOOK_URL
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: TELEGRAM_WEBHOOK_TOKEN
+        sync: false
+      # Optionnelles
+      - key: FIREBASE_CONFIG
+        sync: false
+      - key: YOUTUBE_API_KEY
+        sync: false
+      - key: YOUTUBE_CHANNEL_ID
+        sync: false
+      - key: AMAZON_ACCESS_KEY
+        sync: false
+      - key: AMAZON_SECRET_KEY
+        sync: false
+      - key: GOOGLE_CLOUD_PROJECT_ID
+        sync: false
+      - key: BANK_API_ENDPOINT
+        sync: false
+      - key: BANK_API_KEY
+        sync: false
+      - key: BTC_API_KEY
+        sync: false
+      - key: BTC_EXCHANGE_RATE
+        sync: false
+
+# Pour déploiement auto depuis Git (optionnel)
+# buildCommand: npm run build
+# startCommand: node dist/server.cjs

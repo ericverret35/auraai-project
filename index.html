@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // 🔌 Résilience HMR de développement : Intercepte et désactive les rejets de WebSocket
+      (function() {
+        const isHmrError = function(msg) {
+          if (!msg) return false;
+          const str = String(msg).toLowerCase();
+          return str.includes('websocket') || 
+                 str.includes('failed to connect') || 
+                 str.includes('closed without opened') || 
+                 str.includes('hmr') || 
+                 str.includes('vite');
+        };
+
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event && event.reason) {
+            const reasonStr = event.reason.message || String(event.reason);
+            if (isHmrError(reasonStr)) {
+              console.warn('⚡ [Ignoré] Rejet HMR WebSocket :', reasonStr);
+              event.preventDefault();
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+            }
+          }
+        }, true);
+
+        window.addEventListener('error', function(event) {
+          if (event) {
+            const msg = event.message || (event.error && event.error.message) || '';
+            if (isHmrError(msg)) {
+              console.warn('⚡ [Ignoré] Erreur HMR WebSocket :', msg);
+              event.preventDefault();
+              event.stopPropagation();
+              event.stopImmediatePropagation();
+            }
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>My Google AI Studio App</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
